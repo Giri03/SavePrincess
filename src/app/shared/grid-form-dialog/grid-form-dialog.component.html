@@ -1,17 +1,20 @@
-<h2 mat-dialog-title>Soem titel</h2>
+<h2 mat-dialog-title>Please enter Game Board details</h2>
 
 
 <mat-dialog-content [formGroup]="form">
   <mat-form-field>
+    <mat-label>Please enter board width</mat-label>
     <input matInput placeholder="Enter no of rows" formControlName="row" required>
   </mat-form-field>
+  <br>
   <mat-form-field>
+    <mat-label>Please enter board height</mat-label>
     <input matInput placeholder="Enter no of columns" formControlName="col" required>
   </mat-form-field>
 </mat-dialog-content>
 
 <mat-dialog-actions>
-  <button class="mat-raised-button mat-primary" (click)="save()">
+  <button mat-stroked-button color="primary" (click)="save()">
     Create
   </button>
 </mat-dialog-actions>

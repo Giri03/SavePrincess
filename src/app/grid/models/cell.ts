@@ -15,7 +15,7 @@ export class Cell {
     draw(
         ctx: CanvasRenderingContext2D,
         length: number,
-        cellBackground = '#FFFFFF'
+        cellBackground = '#4f4f4f'
     ) {
         ctx.fillStyle = cellBackground;
         ctx.fillRect(
@@ -25,21 +25,25 @@ export class Cell {
             (this.row + 1) * length
         );
         ctx.beginPath();
-        ctx.moveTo(this.col * length, this.row * length);
-        ctx.lineTo((this.col + 1) * length, this.row * length);
+        ctx.moveTo(this.col * length, (this.row + 1) * length);
+        ctx.lineTo((this.col + 1) * length, (this.row + 1) * length);
         ctx.stroke();
         ctx.beginPath();
         ctx.moveTo((this.col + 1) * length, this.row * length);
         ctx.lineTo((this.col + 1) * length, (this.row + 1) * length);
         ctx.stroke();
-        ctx.beginPath();
-        ctx.moveTo((this.col + 1) * length, (this.row + 1) * length);
-        ctx.lineTo(this.col * length, (this.row + 1) * length);
-        ctx.stroke();
-        ctx.beginPath();
-        ctx.moveTo(this.col * length, (this.row + 1) * length);
-        ctx.lineTo(this.col * length, this.row * length);
-        ctx.stroke();
+        if (this.row == 0) {
+            ctx.beginPath();
+            ctx.moveTo((this.col) * length, this.row * length);
+            ctx.lineTo((this.col + 1) * length, this.row * length);
+            ctx.stroke();
+        }
+        if (this.col == 0) {
+            ctx.beginPath();
+            ctx.moveTo(this.col * length, this.row * length);
+            ctx.lineTo(this.col * length, (this.row + 1) * length);
+            ctx.stroke();
+        }
     }
 
 

@@ -46,11 +46,13 @@ export class Grid {
 
     placePrincess(num) {
         while (num > 0) {
-            const current = this.cells[RandomNumber.within(this.nRow)][
-                RandomNumber.within(this.nCol)
-            ];
-            this.drawPrincess(current);
-            num--;
+            const { x1, y1 } = { x1: RandomNumber.within(this.nRow), y1: RandomNumber.within(this.nCol) }
+            const { x, y } = this.findCenterofGrid();
+            if (!(x == x && y1 == y)) {
+                const current = this.cells[x1][y1];
+                this.drawPrincess(current);
+                num--;
+            }
         }
     }
 
@@ -65,7 +67,7 @@ export class Grid {
             this.ctx.lineWidth = lineThickness;
             this.ctx.strokeStyle = color;
             this.ctx.beginPath();
-            this.ctx.moveTo((cell.col + 0.5) * this.cellSize, (cell.row + 0.5) * this.cellSize);
+            this.ctx.moveTo((cell.col + 0.25) * this.cellSize, (cell.row + 0.25) * this.cellSize);
             this.ctx.lineTo((cell.col + 0.75) * this.cellSize, (cell.row + 0.75) * this.cellSize);
             this.ctx.stroke();
         }
@@ -76,12 +78,14 @@ export class Grid {
         this.ctx.lineWidth = lineThickness;
         this.ctx.strokeStyle = color;
         this.ctx.beginPath();
-        this.ctx.moveTo((cell.col + 0.5) * this.cellSize, (cell.row + 0.5) * this.cellSize);
+        this.ctx.moveTo((cell.col + 0.25) * this.cellSize, (cell.row + 0.25) * this.cellSize);
         this.ctx.lineTo((cell.col + 0.75) * this.cellSize, (cell.row + 0.75) * this.cellSize);
         this.ctx.stroke();
     }
 
-
+    findCenterofGrid() {
+        return { x: Math.floor(this.nRow / 2), y: Math.floor(this.nCol / 2) };
+    }
 
 }
 

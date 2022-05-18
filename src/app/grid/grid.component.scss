@@ -1,0 +1,22 @@
+.canvas-container, .instructions {
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    padding-top: 2rem;
+    flex-direction: row;
+}
+
+.blue-color{
+    background-color: blue;
+    width: 20px;
+    height: 20px;    
+    margin-right: 2px;
+}
+
+.green-color{
+    background-color: green;
+    width: 20px;
+    height: 20px;
+    margin-left: 10px;
+    margin-right: 2px;
+}
