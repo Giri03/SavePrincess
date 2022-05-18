@@ -1,7 +1,7 @@
 import { AfterViewInit, Component, HostListener, OnInit } from '@angular/core';
+import { BehaviorSubject } from 'rxjs';
 import { Cell } from './models/cell';
 import { Grid } from './models/grid';
-import { Player } from './models/player';
 import { keyboardMap } from './models/keyboard-map';
 
 @Component({
@@ -18,21 +18,25 @@ export class GridComponent implements AfterViewInit, OnInit {
 
   title = 'CawStudioGame';
   grid: Grid;
-  row = 10;
-  col = 10;
+  row = 6;
+  col = 6;
   cellSize = 25;
-  player: Player;
   currentPlayerposition: Cell;
-  // cell size
-  // board = new recta();
-  // private maze: Maze;
   private canvas: HTMLCanvasElement;
   private ctx: CanvasRenderingContext2D;
+  noOfSteps;
+  public princessCount: BehaviorSubject<Number> = new BehaviorSubject(0);
 
   ngAfterViewInit() {
     this.canvas = <HTMLCanvasElement>document.getElementById('maze');
     this.ctx = this.canvas.getContext('2d');
     this.drawMaze();
+
+    this.princessCount.subscribe((count) => {
+      if (count === 0) {
+        alert('You saved the Princess!!')
+      }
+    })
   }
 
   drawMaze() {
@@ -40,9 +44,8 @@ export class GridComponent implements AfterViewInit, OnInit {
     this.canvas.width = this.col * this.cellSize;
     this.canvas.height = this.row * this.cellSize;
     this.grid.draw();
-    this.currentPlayerposition = this.grid.cells[0][0];
-    this.player = new Player(this.row, this.col, this.cellSize, this.currentPlayerposition, this.ctx);
-    this.player.drawPlayer(this.currentPlayerposition);
+    this.initiatePlayer();
+    this.initiatePrincess();
   }
 
   @HostListener('window:keydown', ['$event'])
@@ -77,11 +80,35 @@ export class GridComponent implements AfterViewInit, OnInit {
         this.currentPlayerposition.col
       ];
     }
+    this.noOfSteps++;
+    this.grid.drawPlayer(this.currentPlayerposition, false, '#FFFFFF');
     this.currentPlayerposition = nextCell;
-    this.player.drawPlayer(this.currentPlayerposition);
+    this.grid.drawPlayer(this.currentPlayerposition, true);
+    this.princessCountTrack();
   }
 
+  initiatePlayer() {
+    const { x, y } = this.findCenterofGrid();
+    this.currentPlayerposition = this.grid.cells[x][y];
+    this.grid.drawPlayer(this.currentPlayerposition);
+  }
 
+  initiatePrincess() {
+    const no_princess = Math.floor((this.row + this.col) / 2);
+    this.grid.placePrincess(no_princess);
+  }
+
+  findCenterofGrid() {
+    return { x: Math.floor(this.row / 2), y: Math.floor(this.col / 2) };
+  }
+
+  princessCountTrack() {
+    let count = 0;
+    this.grid.cells.map(cells => {
+      count += cells.filter(cell => cell.isPrincess).length;
+    });
+    this.princessCount.next(count);
+  }
 
 
 }

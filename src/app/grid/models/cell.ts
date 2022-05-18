@@ -5,10 +5,11 @@ export class Cell {
    * @param row rowID of the cell in a maze. integer, row>=0
    * @param col colID of the cell in a maze. integer, col>=0
    */
-
     constructor(
         public readonly row: number = 0,
         public readonly col: number = 0,
+        public isPrincess: boolean = false,
+        public isPlayer: boolean = false
     ) { }
 
     draw(

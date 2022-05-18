@@ -1,14 +1,14 @@
 import { Cell } from './cell';
 
 /**
- * A 2-dimensional maze generated
+ * A 2-dimensional grid generated
  */
 export class Grid {
     public readonly cells: Array<Array<Cell>> = [];
     private readonly cellBackground = '#FFFFFF';
 
     /**
-     * Create a maze with <row> &times; <col> cells.
+     * Create a grid with <row> &times; <col> cells.
      * @param nRow number of rows
      * @param nCol number of columns
      */
@@ -26,10 +26,6 @@ export class Grid {
             }
         }
 
-        // generate maze
-        const current = this.cells[RandomNumber.within(this.nRow)][
-            RandomNumber.within(this.nCol)
-        ];
     }
 
     draw(lineThickness = 2) {
@@ -48,7 +44,45 @@ export class Grid {
         this.ctx.restore();
     }
 
+    placePrincess(num) {
+        while (num > 0) {
+            const current = this.cells[RandomNumber.within(this.nRow)][
+                RandomNumber.within(this.nCol)
+            ];
+            this.drawPrincess(current);
+            num--;
+        }
+    }
+
+    drawPlayer(cell: Cell, isPlayer = false, color = '#4080ff', lineThickness = 8) {
+        if (cell.row >= 0 && cell.row < this.nRow && cell.col >= 0 && cell.col < this.nCol) {
+            if (isPlayer) {
+                cell.isPlayer = true;
+                cell.isPrincess = false;
+            } else {
+                cell.isPlayer = false;
+            }
+            this.ctx.lineWidth = lineThickness;
+            this.ctx.strokeStyle = color;
+            this.ctx.beginPath();
+            this.ctx.moveTo((cell.col + 0.5) * this.cellSize, (cell.row + 0.5) * this.cellSize);
+            this.ctx.lineTo((cell.col + 0.75) * this.cellSize, (cell.row + 0.75) * this.cellSize);
+            this.ctx.stroke();
+        }
+    }
+
+    drawPrincess(cell: Cell, color = '#32a850', lineThickness = 8) {
+        cell.isPrincess = true;
+        this.ctx.lineWidth = lineThickness;
+        this.ctx.strokeStyle = color;
+        this.ctx.beginPath();
+        this.ctx.moveTo((cell.col + 0.5) * this.cellSize, (cell.row + 0.5) * this.cellSize);
+        this.ctx.lineTo((cell.col + 0.75) * this.cellSize, (cell.row + 0.75) * this.cellSize);
+        this.ctx.stroke();
+    }
+
     
+
 }
 
 class RandomNumber {
