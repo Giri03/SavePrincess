@@ -1,0 +1,17 @@
+<h2 mat-dialog-title>Soem titel</h2>
+
+
+<mat-dialog-content [formGroup]="form">
+  <mat-form-field>
+    <input matInput placeholder="Enter no of rows" formControlName="row" required>
+  </mat-form-field>
+  <mat-form-field>
+    <input matInput placeholder="Enter no of columns" formControlName="col" required>
+  </mat-form-field>
+</mat-dialog-content>
+
+<mat-dialog-actions>
+  <button class="mat-raised-button mat-primary" (click)="save()">
+    Create
+  </button>
+</mat-dialog-actions>

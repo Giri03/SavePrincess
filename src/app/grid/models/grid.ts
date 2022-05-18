@@ -81,7 +81,7 @@ export class Grid {
         this.ctx.stroke();
     }
 
-    
+
 
 }
 
