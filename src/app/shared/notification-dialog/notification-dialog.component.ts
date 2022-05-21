@@ -11,6 +11,7 @@ import { environment } from 'src/environments/environment';
 export class NotificationDialogComponent implements OnInit {
   winMessage: string;
   count: Number;
+  messages = environment.messages;
 
   constructor(
     private dialogRef: MatDialogRef<NotificationDialogComponent>,
@@ -21,7 +22,7 @@ export class NotificationDialogComponent implements OnInit {
 
   ngOnInit(): void {
     /** Get win message from env file and replacing no of steps obatined from grid component */
-    this.winMessage = environment.messages.winning.replace(
+    this.winMessage = this.messages.winning.replace(
       '${steps}',
       this.count.toString()
     );

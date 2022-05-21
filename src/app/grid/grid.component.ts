@@ -7,6 +7,7 @@ import { NotificationDialogComponent } from '../shared/notification-dialog/notif
 import { Cell } from './models/cell';
 import { Grid } from './models/grid';
 import { keyboardMap } from './models/keyboard-map';
+import { AppConstants } from 'src/app/app.constants';
 
 @Component({
   selector: 'app-grid',
@@ -17,7 +18,7 @@ export class GridComponent implements OnInit {
   private grid: Grid;
   public row = 0;
   public col = 0;
-  private cellSize = 25;
+  private cellSize = AppConstants.cellSize;
   public currentPlayerposition: Cell;
   private canvas: HTMLCanvasElement;
   private ctx: CanvasRenderingContext2D;

@@ -1,11 +1,12 @@
 import { Cell } from './cell';
+import { AppConstants } from 'src/app/app.constants';
 
 /**
  * A 2D grid generated
  */
 export class Grid {
   public readonly cells: Array<Array<Cell>> = [];
-  private readonly cellBackground = '#FFFFFF';
+  private readonly cellBackground = AppConstants.white;
 
   /**
    * Create a grid with <row> &times; <col> cells.
@@ -30,7 +31,7 @@ export class Grid {
   }
 
   /** Call draw for each cell in 2d grid */
-  draw(lineThickness = 2) {
+  draw(lineThickness = AppConstants.lineThickness_2) {
     this.ctx.lineWidth = lineThickness;
     this.cells.forEach((x) =>
       x.forEach((c) => {
@@ -38,11 +39,6 @@ export class Grid {
       })
     );
     this.ctx.save();
-    this.ctx.beginPath();
-    this.ctx.strokeStyle = this.cellBackground;
-    this.ctx.moveTo(this.nCol * this.cellSize, this.nRow * this.cellSize);
-    this.ctx.lineTo(this.nCol * this.cellSize, this.nRow * this.cellSize);
-    this.ctx.stroke();
     this.ctx.restore();
   }
 
@@ -74,8 +70,8 @@ export class Grid {
   drawPlayer(
     cell: Cell,
     isPlayer = false,
-    color = '#4080ff',
-    lineThickness = 8
+    color = AppConstants.priceColor,
+    lineThickness = AppConstants.lineThickness_8
   ) {
     if (
       cell.row >= 0 &&
@@ -109,7 +105,11 @@ export class Grid {
    * @param color color of player
    * @param lineThickness number
    */
-  drawPrincess(cell: Cell, color = '#32a850', lineThickness = 8) {
+  drawPrincess(
+    cell: Cell,
+    color = AppConstants.princessColor,
+    lineThickness = AppConstants.lineThickness_8
+  ) {
     cell.isPrincess = true;
     this.ctx.lineWidth = lineThickness;
     this.ctx.strokeStyle = color;

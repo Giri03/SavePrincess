@@ -1,3 +1,4 @@
+import { AppConstants } from 'src/app/app.constants';
 export class Cell {
   /**
    * Create a cell in a maze.
@@ -15,7 +16,7 @@ export class Cell {
   draw(
     ctx: CanvasRenderingContext2D,
     length: number,
-    cellBackground = '#4f4f4f'
+    cellBackground = AppConstants.cellBackgroundColor
   ) {
     ctx.fillStyle = cellBackground;
     ctx.fillRect(

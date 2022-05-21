@@ -1,20 +1,20 @@
-<h2 mat-dialog-title>Please enter Game Board details</h2>
+<h2 mat-dialog-title>{{ messages.enter_board_details }}</h2>
 
 
 <mat-dialog-content [formGroup]="form">
   <mat-form-field>
-    <mat-label>Please enter board width</mat-label>
-    <input matInput placeholder="Enter no of rows" formControlName="row" required>
+    <mat-label>{{ messages.enter_width }}</mat-label>
+    <input matInput placeholder={{messages.enter_row}} formControlName="row" required>
   </mat-form-field>
   <br>
   <mat-form-field>
-    <mat-label>Please enter board height</mat-label>
-    <input matInput placeholder="Enter no of columns" formControlName="col" required>
+    <mat-label>{{ messages.enter_height }}</mat-label>
+    <input matInput placeholder={{messages.enter_col}} formControlName="col" required>
   </mat-form-field>
 </mat-dialog-content>
 
 <mat-dialog-actions>
   <button mat-stroked-button color="primary" (click)="save()">
-    Create
+    {{ messages.create }}
   </button>
 </mat-dialog-actions>

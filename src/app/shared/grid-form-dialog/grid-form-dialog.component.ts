@@ -1,6 +1,7 @@
 import { Component, Inject, OnInit, ViewEncapsulation } from '@angular/core';
 import { MatDialogRef } from '@angular/material/dialog';
 import { FormBuilder, Validators, FormGroup } from '@angular/forms';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-grid-form-dialog',
@@ -11,6 +12,7 @@ export class GridFormDialogComponent implements OnInit {
   form: FormGroup;
   row: number;
   col: number;
+  messages = environment.messages;
 
   constructor(
     private fb: FormBuilder,
