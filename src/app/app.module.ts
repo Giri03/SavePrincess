@@ -12,6 +12,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 import { NotificationDialogComponent } from './shared/notification-dialog/notification-dialog.component';
 import { GridFormDialogComponent } from './shared/grid-form-dialog/grid-form-dialog.component';
+import { NotFoundPageComponent } from './shared/not-found-page/not-found-page.component';
 
 const ANGULAR_MATERIAL_MODULES = [
   MatDialogModule,
@@ -26,7 +27,8 @@ const ANGULAR_MATERIAL_MODULES = [
     HomeComponent,
     GridComponent,
     NotificationDialogComponent,
-    GridFormDialogComponent
+    GridFormDialogComponent,
+    NotFoundPageComponent
   ],
   imports: [
     ...ANGULAR_MATERIAL_MODULES,

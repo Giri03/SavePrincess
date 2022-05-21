@@ -16,10 +16,6 @@ import { GridComponent } from './grid.component';
 import { Cell } from './models/cell';
 import { Grid } from './models/grid';
 
-class MockCellClass {
-  row: number = 10;
-  col: number = 10;
-}
 class MockGridClass {
   draw() {
     return;
@@ -101,7 +97,6 @@ describe('GridComponent', () => {
   });
 
   it('should initialize vars', () => {
-    expect((component as any).title).toEqual('SavePrincessGame');
     expect(component.col).toEqual(0);
     expect(component.row).toEqual(0);
     expect((component as any).cellSize).toEqual(25);
@@ -120,17 +115,17 @@ describe('GridComponent', () => {
       expect(component.startGame).toHaveBeenCalled();
     });
 
-    it('should define canvas and drawMaze', () => {
-      spyOn(component, 'drawMaze');
+    it('should define canvas and drawBoard', () => {
+      spyOn(component, 'drawBoard');
       spyOn(component, 'openDialogToEnterDetails').and.returnValue(
         of({ row: 10, col: 10 })
       );
       component.ngOnInit();
       expect((component as any).canvas).toBeDefined();
-      expect(component.drawMaze).toHaveBeenCalled();
+      expect(component.drawBoard).toHaveBeenCalled();
     });
 
-    it('should drawMaze, set canvas and grid, initiatePlayer and princess', () => {
+    it('should drawBoard, set canvas and grid, initiatePlayer and princess', () => {
       spyOn(component, 'openDialogToEnterDetails').and.returnValue(
         of({ row: 10, col: 10 })
       );
