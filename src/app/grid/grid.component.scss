@@ -1,9 +1,14 @@
+.page-container {
+    background-color: #EEEEEE;
+    width: 100%;
+    height: 100%;
+}
 .canvas-container, .instructions {
     display: flex;
     justify-content: center;
     align-items: flex-start;
     padding-top: 2rem;
-    flex-direction: row;
+    flex-direction: row;  
 }
 
 .blue-color{
